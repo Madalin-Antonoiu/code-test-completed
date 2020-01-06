@@ -1,7 +1,11 @@
+
+<!-- Acceptance Criteria Nr.3 -  "Review the code in ProductList.vue and fix the bugs that exist." -->
 <template>
   <div>
+
     <label for="selector">
       Filter:
+      <!-- Criteria.7 - Extra filtering options  -->
       <select v-model="select" id="selector">
         <option value="all" selected>All</option>
         <option value="purchased">Purchased</option>
@@ -12,43 +16,23 @@
     </label>
 
     <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
-    <!-- This is the main list view -->
 
-  <div class="row">
-    <aside class="aspect-ratio"></aside>
+    <section class="cards">
+       <!--Product.vue -->
+      <Product class="card" v-for="(product, idx) in sortedProducts" :key="idx" :product="product" />
+    </section>
 
-    <div class="column" v-for="(product, idx) in products" :key="idx">
-
-          <div class="card">
-            <img class="img" :src="`${product.image}`" :alt="`${product.description}`">
-            <div class="footer">
-              <h3>{{ product ? product.title : "" }}</h3>
-              <p>{{ product ? product.price : "" }}</p>
-              <p>{{ product ? product.description : "" }}</p>
-              <div class="avatar">
-                <span class="active-state"></span>
-                <span class="oval"></span>
-              </div>
-            </div>
-
-            </div>
-          </div>
-  
-      </div>
-  
   </div>
 </template>
 
 <script>
-//import Product from "../components/Product";
+import Product from "../components/Product";
 const productItems = require("@/assets/products.json");
-
-
 
 export default {
   name: "ProductList",
   components: {
-    //Product
+    Product
   },
   computed: {
     products() {
@@ -97,17 +81,29 @@ export default {
       };
 
       return "Product";
-    }
+    },
+    // Acceptance Criteria Nr.9: "The products should be displayed in the correct order" 
+    sortedProducts: function() {
+        function order(a, b) {
+           if (a.order < b.order) return -1;
+           if (a.order > b.order) return 1;
+           return 0;
+        }
+        // return this.users.sort(order); // sorts in-place
+        return [...this.products].sort(order); // shallow clone + sort
+     }
   },
   data() {
     //Default option
     return {
       select: "all",
-      selectedFilter: "all"
+      selectedFilter: "all",
+      
+
     };
   },
   watch: {
-    select: function(oldVal) {//2nd fix
+    select: function(oldVal) {// fix
       this.selectedFilter = oldVal;
     }
   }
@@ -117,112 +113,61 @@ export default {
 
 <style lang="scss">
 
-:root {
-	/* variables */
-	--spacing: 24px;
-	--min-card-width: 250px;
-	--ratio-percent: 75%; /* Perfect 4:3 Ratio*/
-	--addl-height: 100px;
+
+/***************************           Cards            *******************************/
+
+.cards {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(4, minmax(290px, 1fr)); /* see notes below */
+  grid-auto-rows: minmax(200px, auto);
+  grid-gap: 1rem;
+  margin: 20px;
 }
 
-* {
-  box-sizing: border-box;
-}
+.card {
+  /*height: 200px;*/
+  /*background: red;*/
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+  display: flex;
+  /* -webkit-box-orient: vertical; */
+  /* -webkit-box-direction: normal; */
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  
+
+} 
 
 
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 25%;
-  padding: 10px;
-}
-
-.img{
-    height: auto;
-    width: 100%;
-    vertical-align: middle;
-    border-radius: 8px 8px 0px 0px ;
-   
-
-}
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive columns - Criteria 1 */
+// Acceptance Criteria Nr.5 - Responsive columns and media queries 
 @media screen and (max-width: 600px) { // <600px
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
+  .cards {
+    grid-template-columns: repeat(1, minmax(320px, 1fr));
+ 
   }
 }
 
 @media (min-width: 601px) and (max-width: 800px) { // <601-800px>
-  .column {
-    width: 50%;
-    display: block;
-    margin-bottom: 20px;
+  .cards {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+ 
   }
 }
 
 @media (min-width: 801px) and (max-width: 1024px) { // <801-1024px>
-  .column {
-    width: 33.3%;
-    display: block;
-    margin-bottom: 20px;
+  .cards {
+grid-template-columns: repeat(3, minmax(200px, 1fr));
   }
 }
 
 @media screen and (min-width: 1025px) { // >1025px
-  .column {
-    width: 25%;
+  .cards {
+     grid-template-columns: repeat(4, minmax(200px, 1fr));
   }
 }
-
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  text-align: center;
-  color: #f1f1f1;
-  border-radius:  0px 0px 8px 8px;
-  position: relative; // for .avatar's absolute positioning
-}
-
-.footer{
-  padding: 16px;
-  background: #282828;
-}
-
-.avatar{
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  left: 85%;
-  top: 72.5%;
-  background: url(../assets/avatar.png);
-  background-size:cover;
-  border-radius: 50%;
-    .active-state{
-      position: absolute;
-      //visibility: hidden;
-      left: 75%;
-      right: 0%;
-      top: 0%;
-      bottom: 75%;
-      background: #7ED321;
-      border-radius:50%;
-    }
-  }
-
-
 
 </style>

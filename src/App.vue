@@ -20,10 +20,10 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  // ## Acceptance Criteria
+  // Acceptance Criteria Nr.6 - "The page should be wrapped in a centered container with a max-width of 1600px"
   max-width: 1600px;
   margin:0 auto;
-  // ##
+ 
 }
 
 #nav {

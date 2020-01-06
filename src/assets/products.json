@@ -10,7 +10,8 @@
     "type": "recurring",
     "duration": 1,
     "discount": null,
-    "order": 0
+    "order": 0,
+    "active": false
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "type": "recurring",
     "duration": 1,
     "discount": "25%",
-    "order": 1
+    "order": 1,
+    "active": true
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
     "type": "onetime",
     "duration": null,
     "discount": null,
-    "order": 3
+    "order": 3,
+    "active" : false
   },
   {
     "id": 4,
@@ -49,7 +52,8 @@
     "type": "onetime",
     "duration": null,
     "discount": null,
-    "order": 2
+    "order": 2,
+    "active": false
   },
   {
     "id": 5,
@@ -62,6 +66,7 @@
     "type": "onetime",
     "duration": null,
     "discount": "100%",
-    "order": 4
+    "order": 4,
+    "active": true
   }
 ]
