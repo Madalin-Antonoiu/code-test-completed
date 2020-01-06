@@ -9,29 +9,29 @@
 </template>
 
 <style lang="scss">
-  body{
-    margin:0;
-    padding:0;
-    background: #e2e1e0;
-  }
-  #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
+body {
+  margin: 0;
+  padding: 0;
+  background: #e2e1e0;
+}
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  //Criteria6 - "The page should be wrapped in a centered container with a max-width of 1600px"
+  max-width: 1600px;
+  margin: 0 auto;
+}
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
     color: #2c3e50;
-    //Criteria6 - "The page should be wrapped in a centered container with a max-width of 1600px"
-    max-width: 1600px;
-    margin:0 auto;
-  }
-  #nav {
-    padding: 30px;
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      &.router-link-exact-active {
-        color: #42b983;
-      }
+    &.router-link-exact-active {
+      color: #42b983;
     }
   }
+}
 </style>
