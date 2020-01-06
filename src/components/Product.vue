@@ -1,15 +1,15 @@
-<!-- Criteria.1-->
 <template>
 
+  <!--//Criteria1 - Product.vue "Create a component for displaying a product in a list. Product.vue"-->
   <div class="product">
     <img  :src="`${product.image}`" :alt="`${product.description}`" />
     <div class="card-content">
-      <!-- Bonus: Making a badge (if only discounted) that wants to make you buy? Checked!-->
+      <!-- Bonus: Dinamically created badge (if only discounted) for enhanced discount effect? Checked!-->
       <span v-bind:class="{promotionActive: product.discount }" > {{ product.discount ? "-" + product.discount : ""}}</span>
       <p>{{ product ? product.title : "" }}</p>
-       <!--Bonus: Strikes-through with a line the old price IF only there is a discount. Cause why not?-->
+       <!--Bonus: Casually striking-through the old price with a line IF only there is a discount associated? Why not?-->
       <p><span v-bind:class="{lineThrough: product.discount }" class="full-price">{{ product ? product.price : "" }}</span> 
-        <!-- Criteria.8 - Logic used : [In one line] If discount exist, substract from the full price the multiplication between full price and discount divided by 100.0--> 
+        <!--//Criteria8 - The logic [in one line]: If discount exist, substract from the full price the multiplication between full price and discount divided by 100.0--> 
         <span class="discount">{{ product.discount ? product.price - (product.price * parseInt(product.discount) / 100.0) : "" }}</span></p>
       <p class="description">{{ product ? product.description : "" }}</p>
       <div class="avatar"><!-- Bonus: Added active state based on the same JSON file. Green is the new gray. -->
@@ -17,7 +17,7 @@
       </div>     
     </div>
   </div>
-
+  
 </template>
 
 <script>
@@ -35,67 +35,50 @@ export default {
 </script>
 
 <style lang="scss">
-
-   @font-face {
-    font-family: 'Gilroy';
-    src: url('/assets/fonts/MyFontSerifReg.otf');
-  }
-
-* {
-  -webkit-box-sizing: border-box;
+  //Criteria10 - Following Figma's design as close as possible.
+   @font-face {font-family: 'Gilroy'; src: url('/assets/fonts/MyFontSerifReg.otf');}
+  *{
+    -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-
-
-a {
-  text-decoration: none;
-  color: orange;
-}
-
-p{
-  margin-left:16px;
-  margin-bottom:8px;
-  margin-top:0px;
-}
-
-img {
-  display: block;
+  }
+  a{
+    text-decoration: none;
+    color: orange;
+  }
+  p{
+    margin-left:16px;
+    margin-bottom:8px;
+    margin-top:0px;
+  }
+  img{
+    display: block;
     border: 0;
     width: 100%;
-    height: auto;
-}
-.discount{
- color: #F03013;
-  padding-left:3px;
-}
-
-.promotionActive{
-  position: absolute;
-  left: 2%;
-  bottom:31%;
-  background: #FF4200;
-  width:60px;
-  height:18px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.lineThrough{
-  text-decoration: line-through;
-  text-decoration-color: rgb(0, 0, 0);
-  opacity:0.3;
-}
-
-img {
-  fill: #c7c4c4;
-  height: 180px;
-  border-radius: 8px 8px 0px 0px;
-}
-
-.card-content {
-  color: #FFFFFF;
+    height: 180px;
+    border-radius: 8px 8px 0px 0px;
+  }
+  .discount{
+    color: #F03013;
+    padding-left:3px;
+  }
+  .promotionActive{
+    position: absolute;
+    left: 2%;
+    bottom:31%;
+    background: #FF4200;
+    width:60px;
+    height:18px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .lineThrough{
+    text-decoration: line-through;
+    text-decoration-color: rgb(0, 0, 0);
+    opacity:0.3;
+  }
+  .card-content {
+    color: #FFFFFF;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -119,35 +102,24 @@ img {
       font-weight: 500;
       font-size: 12px;
       line-height: 14px;
-     
       color: #BDBDBD;
-   
     }
-}
-
-
-
-.panel.card-panel .panel-header {
-    //background-color: #ffffff;
+  }
+  .panel.card-panel .panel-header {
     font-size: .75rem;
     font-weight: 400;
-    //height: 25px !important;
-}
-
-.panel.card-panel .panel-content {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-footer {
-  //border-top: 2px solid #e7e7e7;
-  min-height: 30px;
-  font-size: .5rem;
-  background: #282828;
-}
-
-.category {
+  }
+  .panel.card-panel .panel-content {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  footer {
+    min-height: 30px;
+    font-size: .5rem;
+    background: #282828;
+  }
+  .category {
     position: absolute;
     top: 110px;
     left: 0;
@@ -157,8 +129,7 @@ footer {
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
-}
-
+  }
   .avatar{
     position: absolute;
     width: 32px;
@@ -168,28 +139,24 @@ footer {
     background: url(../assets/avatar.png);
     background-size:cover;
     border-radius: 50%;
-      .activeState{
-        position: absolute;
-        //visibility: hidden; // Green elipse  toggle
-        left: 75%;
-        right: 0%;
-        top: 0%;
-        bottom: 75%;
-        background:grey;
-        border-radius:50%;
-      }
-        .isActive{
-        position: absolute;
-        //visibility: hidden; // Green elipse  toggle
-        left: 75%;
-        right: 0%;
-        top: 0%;
-        bottom: 75%;
-        border-radius:50%;
-        background:  #7ED321 !important;
-      }
+    .activeState{
+      position: absolute;
+      //visibility: hidden; //Grey/Green elipse display toggle
+      left: 75%;
+      right: 0%;
+      top: 0%;
+      bottom: 75%;
+      background:grey;
+      border-radius:50%;
+    }
+    .isActive{
+      position: absolute;
+      left: 75%;
+      right: 0%;
+      top: 0%;
+      bottom: 75%;
+      border-radius:50%;
+      background:  #7ED321 !important;
+    }
   }
-
-
-
 </style>
